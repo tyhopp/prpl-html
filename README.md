@@ -1,6 +1,9 @@
 # PRPL HTML
 An experiment implementing the [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/) with HTML files.
 
+## See
+Visit the [deployed site](https://prpl-html.netlify.app) to get a feel for how the mechanism works.
+
 ## Why
 Typically this pattern is used to prefetch things like JavaScript bundles or JSON required to construct the DOM for the next page. I thought it might be interesting to boil it down further and prefetch the actual html of the next page.
 
