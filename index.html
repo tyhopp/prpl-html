@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+  <title>PRPL HTML</title>
+</head>
+<body>
+  <h1>Hello world!</h1>
+  <p>Let's try implementing the <a href="https://web.dev/apply-instant-loading-with-prpl/" target="_blank">PRPL pattern</a> with HTML files only.</p>
+  <p>Try navigating to the <a href="second.html">second page</a>, which I have prefetched.</p>
+  <p>Then, try navigating to the <a href="third.html">third page</a>, which I have not prefetched.</p>
+  
+  <!-- Prefetch script -->
+  <script>
+    // TODO - Do this in a worker
+    const secondPage = Array.from(document.querySelectorAll('a')).filter(page => page.href.includes('second'));
+    fetch(secondPage)
+      .then(response => response.text())
+      .then(html => localStorage.setItem(secondPage, html))
+      .catch(error => console.error('Failed to prefetch the second page.' , error));
+  </script>
+
+  <!-- Router -->
+  <script>
+    document.addEventListener('click', e => {
+      const anchor = e.target.closest('a');
+      if (anchor && anchor.href.includes('second')) {
+        e.preventDefault();
+        try {
+          const html = localStorage.getItem(anchor.href);
+          const parser = new DOMParser();
+          const targetDocumentBody = parser.parseFromString(html, 'text/html').body;
+          document.body = targetDocumentBody;
+        } catch (error) {
+          console.error('Failed to get html from local storage.' , error);
+        }
+      }
+    });
+  </script>
+</body>
