@@ -30,6 +30,7 @@
           const targetDocumentBody = parser.parseFromString(html, 'text/html').body;
           document.body = targetDocumentBody;
         } catch (error) {
+          window.location.assign(anchor.href);
           console.error('Failed to get html from local storage.' , error);
         }
       }
