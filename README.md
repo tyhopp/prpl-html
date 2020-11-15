@@ -22,3 +22,5 @@ Typically this pattern is used to prefetch things like JavaScript bundles or JSO
   - Number of storage items
   - Read/write speed
   - Sites or users that disable local storage
+- Should use a smarter technique to determine which links to prefetch and when to do it
+- Should do the prefetch in a worker to offload work to another thread
